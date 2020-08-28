@@ -1,0 +1,25 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t shwetagarg/react-test -f ./client/Dockerfile.dev ./client
+  
+script:
+  - docker run -e CI=true shwetagarg/react-test npm run test
+
+#create images for all projects   
+after_success:
+  - docker build -t shwetagarg/multi-client ./client
+  - docker build -t shwetagarg/multi-nginx ./nginx
+  - docker build -t shwetagarg/multi-server ./server
+  - docker build -t shwetagarg/multi-worker ./worker
+  
+# Login to docker CLI, login credentials set up as env variables in Travis in multi-docker repo
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+ 
+# push images to docker hub
+  - docker push shwetagarg/multi-client
+  - docker push shwetagarg/multi-nginx
+  - docker push shwetagarg/multi-server
+  - docker push shwetagarg/multi-worker
