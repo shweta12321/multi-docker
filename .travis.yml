@@ -17,7 +17,7 @@ after_success:
   - docker build -t 09092013/multi-worker ./worker
   
 # Login to docker CLI, login credentials set up as env variables in Travis in multi-docker repo
-  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin docker.io
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin docker.io
  
 # push images to docker hub
   - docker push 09092013/multi-client
