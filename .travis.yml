@@ -5,8 +5,8 @@ services:
 before_install:
   - docker build -t shwetagarg/react-test -f ./client/Dockerfile.dev ./client
   
-script:
-  - docker run -e CI=true shwetagarg/react-test npm run test
+#script:
+#  - docker run -e CI=true shwetagarg/react-test npm run test
 
 #create images for all projects   
 after_success:
