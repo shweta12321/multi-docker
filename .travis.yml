@@ -25,7 +25,7 @@ after_success:
   - docker push 09092013/multi-server
   - docker push 09092013/multi-worker
   
- deploy:
+deploy:
   edge: true
   provider: elasticbeanstalk
   region: "us-east-2"
